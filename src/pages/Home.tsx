@@ -43,6 +43,8 @@ const LogoIcon = styled.div`
   font-size: 1.2rem;
 `
 
+/* 메인에서는 사용하지 않음 */
+/*
 const SearchContainer = styled.div`
   flex: 1;
   max-width: 500px;
@@ -68,6 +70,7 @@ const SearchInput = styled.input`
     border-color: ${props => props.theme.colors.primary};
   }
 `
+*/
 
 const HeaderActions = styled.div`
   display: flex;
@@ -75,21 +78,6 @@ const HeaderActions = styled.div`
   gap: 1rem;
 `
 
-const GitHubButton = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: none;
-  border: none;
-  color: ${props => props.theme.colors.text};
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 6px;
-  
-  &:hover {
-    background-color: ${props => props.theme.colors.surfaceHover};
-  }
-`
 
 const UploadButton = styled.button`
   background: ${props => props.theme.gradients.primary};
@@ -149,12 +137,31 @@ const HeroSubtitle = styled.p`
 const HeroTitle = styled.h1`
   font-size: 3.5rem;
   font-weight: bold;
-  background: ${props => props.theme.gradients.primary};
+  background: linear-gradient(
+    45deg,
+    #6B25DA,
+    #ffffff,
+    #6B25DA
+  );
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 1.5rem;
   line-height: 1.1;
+  animation: gradientShift 5s ease-in-out infinite;
+  
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -245,7 +252,7 @@ const FilterBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin: 2rem 0 2rem;
   flex-wrap: wrap;
   gap: 1rem;
 `
@@ -256,17 +263,17 @@ const CategoryButtons = styled.div`
   flex-wrap: wrap;
 `
 
-const CategoryButton = styled.button<{ active?: boolean }>`
+const CategoryButton = styled.button<{ $active?: boolean }>`
   padding: 0.5rem 1rem;
-  background-color: ${props => props.active ? props.theme.colors.primary : props.theme.colors.surface};
-  color: ${props => props.active ? props.theme.colors.white : props.theme.colors.textSecondary};
-  border: 1px solid ${props => props.active ? props.theme.colors.primary : props.theme.colors.border};
+  background-color: ${props => props.$active ? props.theme.colors.primary : props.theme.colors.surface};
+  color: ${props => props.$active ? props.theme.colors.white : props.theme.colors.textSecondary};
+  border: 1px solid ${props => props.$active ? props.theme.colors.primary : props.theme.colors.border};
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.875rem;
   
   &:hover {
-    background-color: ${props => props.active ? props.theme.colors.primaryHover : props.theme.colors.surfaceHover};
+    background-color: ${props => props.$active ? props.theme.colors.primaryHover : props.theme.colors.surfaceHover};
   }
 `
 
@@ -344,6 +351,12 @@ const VerifiedBadge = styled.span`
   display: flex;
   align-items: center;
   gap: 0.25rem;
+`
+
+const CheckIcon = styled.svg`
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 `
 
 const NodeVersion = styled.span`
@@ -466,18 +479,15 @@ const Home = () => {
           <HeaderContent>
             <Logo>
               <LogoIcon>⚡</LogoIcon>
-              LangA
+              LLangA
             </Logo>
             
-            <SearchContainer>
+            {/* 메인에서는 표시 안함 */}
+            {/* <SearchContainer>
               <SearchInput placeholder="Q Search nodes..." />
-            </SearchContainer>
+            </SearchContainer> */}
             
             <HeaderActions>
-              <GitHubButton>
-                <span>📁</span>
-                GitHub
-              </GitHubButton>
               <UploadButton>Upload Node</UploadButton>
               <ThemeToggle onClick={toggleTheme}>
                 {theme === 'light' ? '🌙' : '☀️'}
@@ -489,8 +499,8 @@ const Home = () => {
 
       <HeroSection>
         <HeroContent>
-          <HeroSubtitle>LLM FRAMEWORK COMMUNITY</HeroSubtitle>
-          <HeroTitle>Share & Discover AI Nodes</HeroTitle>
+        <HeroSubtitle>LANGSTAR COMMUNITY</HeroSubtitle>
+          <HeroTitle>Large Language Association</HeroTitle>
           <HeroDescription>
             커뮤니티가 만든 검증된 노드들을 탐색하고, 당신만의 혁신적인 노드를 공유해보세요. 
             LLM 프레임워크의 무한한 가능성을 함께 만들어갑니다.
@@ -521,7 +531,7 @@ const Home = () => {
       <ContentSection>
         <FilterBar>
           <CategoryButtons>
-            <CategoryButton active>All</CategoryButton>
+            <CategoryButton $active>All</CategoryButton>
             <CategoryButton>Text Processing</CategoryButton>
             <CategoryButton>Image Generation</CategoryButton>
             <CategoryButton>Data Analysis</CategoryButton>
@@ -531,7 +541,6 @@ const Home = () => {
           
           <FilterControls>
             <CheckboxLabel>
-              <Checkbox type="checkbox" />
               검증된 노드만
             </CheckboxLabel>
             <SortSelect>
@@ -546,7 +555,12 @@ const Home = () => {
           <NodeCard>
             <NodeHeader>
               <NodeTitle>Text Summarizer Pro</NodeTitle>
-              <VerifiedBadge>✓ 검증됨</VerifiedBadge>
+              <VerifiedBadge>
+                <CheckIcon viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </CheckIcon>
+                검증됨
+              </VerifiedBadge>
             </NodeHeader>
             <NodeVersion>v2.1.4</NodeVersion>
             <NodeDescription>
@@ -575,7 +589,12 @@ const Home = () => {
           <NodeCard>
             <NodeHeader>
               <NodeTitle>Image Style Transfer</NodeTitle>
-              <VerifiedBadge>✓ 검증됨</VerifiedBadge>
+              <VerifiedBadge>
+                <CheckIcon viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </CheckIcon>
+                검증됨
+              </VerifiedBadge>
             </NodeHeader>
             <NodeVersion>v1.5.2</NodeVersion>
             <NodeDescription>
@@ -632,7 +651,12 @@ const Home = () => {
           <NodeCard>
             <NodeHeader>
               <NodeTitle>API Gateway</NodeTitle>
-              <VerifiedBadge>✓ 검증됨</VerifiedBadge>
+              <VerifiedBadge>
+                <CheckIcon viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </CheckIcon>
+                검증됨
+              </VerifiedBadge>
             </NodeHeader>
             <NodeVersion>v1.2.0</NodeVersion>
             <NodeDescription>
@@ -689,7 +713,12 @@ const Home = () => {
           <NodeCard>
             <NodeHeader>
               <NodeTitle>File Processor</NodeTitle>
-              <VerifiedBadge>✓ 검증됨</VerifiedBadge>
+              <VerifiedBadge>
+                <CheckIcon viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </CheckIcon>
+                검증됨
+              </VerifiedBadge>
             </NodeHeader>
             <NodeVersion>v1.8.3</NodeVersion>
             <NodeDescription>

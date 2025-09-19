@@ -19,8 +19,8 @@ export const lightTheme = {
     black: '#000000',
   },
   gradients: {
-    primary: 'linear-gradient(135deg, #8b5cf6, #a855f7)',
-    primaryHover: 'linear-gradient(135deg, #7c3aed, #9333ea)',
+    primary: 'linear-gradient(135deg, #6b25da, #8b5cf6)',
+    primaryHover: 'linear-gradient(135deg, #8b5cf6, #6b25da)',
     hero: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
   },
   shadows: {
@@ -50,8 +50,8 @@ export const darkTheme = {
     black: '#000000',
   },
   gradients: {
-    primary: 'linear-gradient(135deg, #8b5cf6, #a855f7)',
-    primaryHover: 'linear-gradient(135deg, #7c3aed, #9333ea)',
+    primary: 'linear-gradient(135deg, #6b25da, #8b5cf6)',
+    primaryHover: 'linear-gradient(135deg, #8b5cf6, #6b25da)',
     hero: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)',
   },
   shadows: {

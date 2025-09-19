@@ -26,6 +26,6 @@
       "@/services/*": ["src/services/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "src/types/styled.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
